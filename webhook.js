@@ -18,13 +18,12 @@ let server = http.createServer(function (req, res) {
       // github 请求来的时候， 要传递请求体body，另外还会传一个signature过来，需要验证签名对不对
       let signature = req.headers['x-hub-signature']
       if (signature != sign(body)) {
-        res.end('Not Allowed')
+        return res.end('Not Allowed')
       }
       res.setHeader('Content-Type', 'application/json');
       res.end(JSON.stringify({ ok: true }))
       if (event == 'push') {  //开始部署
         let payload = JSON.parse(body);
-        console.log('111');
         console.log(payload.repository.name);
         let child = spawn('sh', [`./${payload.repository.name}.sh`])
         let buffers = [];
@@ -33,7 +32,7 @@ let server = http.createServer(function (req, res) {
         })
         child.stdout.on('end', function (buffer) {
           let log = Buffer.concat(buffers)
-          console.log(log);
+          console.log(JSON.parse(log));
         })
       }
     })
