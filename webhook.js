@@ -34,9 +34,11 @@ let server = http.createServer(function (req, res) {
         let child = spawn('sh', [`./${payload.repository.name}.sh`])
         let buffers = [];
         child.stdout.on('data', function (buffer) {
+          console.log(7);
           buffers.push(buffer)
         })
         child.stdout.on('end', function (buffer) {
+          console.log(8);
           let log = Buffer.concat(buffers)
           console.log(JSON.parse(log));
         })
