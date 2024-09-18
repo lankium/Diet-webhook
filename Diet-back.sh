@@ -5,7 +5,7 @@ echo "先清除老代码"
 git reset --hard origin/main
 git clean -f
 echo "拉去最新代码"
-git pull origin master
+git pull origin main
 echo "开始执行构建"
 docker build -t Diet-back .
 echo "停止旧容器并删除旧容器"
