@@ -22,8 +22,8 @@ let server = http.createServer(function (req, res) {
       }
       res.setHeader('Content-Type', 'application/json');
       res.end(JSON.stringify({ ok: true }))
-      if (event === 'push') {  //开始部署
-        let payload = JSON.parse();
+      if (event == 'push') {  //开始部署
+        let payload = JSON.parse(body);
         let child = spawn('sh', [`./${payload.repository.name}.sh`])
         let buffers = [];
         child.stdout.on('data', function (buffer) {
