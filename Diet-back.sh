@@ -7,9 +7,9 @@ git clean -f
 echo "拉去最新代码"
 git pull origin main
 echo "开始执行构建"
-docker build -t Diet-back .
+docker build -t Diet-back:1.0 .
 echo "停止旧容器并删除旧容器"
 docker stop Diet-back-container
 docker rm Diet-back-container
 echo "启动新容器"
-docker container run -p 3000:3000 --name Diet-back-container -d Diet-back
+docker container run -p 3000:3000 --name Diet-back-container -d Diet-back:1.0
