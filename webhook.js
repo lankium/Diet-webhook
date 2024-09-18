@@ -1,4 +1,3 @@
-const { sign } = require('crypto');
 let http = require('http');
 let SECRET = '123456'
 let crypto = require('crypto')
