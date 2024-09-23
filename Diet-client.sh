@@ -8,11 +8,12 @@ echo "拉去最新代码"
 git pull origin main
 echo "编译"
 npm run build
-echo "开始执行构建"
-docker build -t diet-client:1.0 .
 echo "停止旧容器并删除旧容器"
 docker stop diet-client-container
 docker rm diet-client-container
-docker rmi diet-client
+echo "删除旧镜像"
+docker rmi diet-client:1.0
+echo "开始执行构建"
+docker build -t diet-client:1.0 .
 echo "启动新容器"
 docker container run -p 80:80 --name diet-client-container -d diet-client:1.0

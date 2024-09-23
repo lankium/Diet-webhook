@@ -6,11 +6,12 @@ git reset --hard origin/main
 git clean -f
 echo "拉去最新代码"
 git pull origin main
-echo "开始执行构建"
-docker build -t diet-back:1.0 .
 echo "停止旧容器并删除旧容器"
 docker stop diet-back-container
 docker rm diet-back-container
-docker rmi diet-back
+echo "删除旧容器"
+docker rmi diet-back:1.0
+echo "开始执行构建"
+docker build -t diet-back:1.0 .
 echo "启动新容器"
 docker container run -p 3000:3000 --network diet --name diet-back-container -d diet-back:1.0
